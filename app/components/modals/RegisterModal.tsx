@@ -13,12 +13,14 @@ import Input from "../inputs/Input";
 import toast from "react-hot-toast";
 import Button from "../Button";
 import { signIn } from "next-auth/react";
+import useLoginModal from "@/app/hooks/useLoginModal";
 
 /* Main modal to register the user */
 /* Using Zustand for global state , React Hook Form for form submission */
 /* Using Prisma and MongoDb to register and creation of the user */
 function RegisterModal() {
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -47,6 +49,11 @@ function RegisterModal() {
         setIsLoading(false);
       });
   };
+
+  const toggle = useCallback(() => {
+    registerModal.onClose();
+    loginModal.onOpen();
+  }, [loginModal, registerModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -86,7 +93,7 @@ function RegisterModal() {
         outline
         label="Continue with Google"
         icon={FcGoogle}
-        onClick={() => {}}
+        onClick={() => signIn("google")}
       />
       <Button
         outline
@@ -98,7 +105,7 @@ function RegisterModal() {
         <div className="flex flex-row items-center gap-2 justify-center">
           <div>Already have an account?</div>
           <div
-            onClick={registerModal.onClose}
+            onClick={toggle}
             className="text-neutral-800 cursor-pointer hover:underline"
           >
             Log in

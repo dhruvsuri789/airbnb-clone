@@ -6,8 +6,10 @@ import { useRouter } from "next/navigation";
 /* Main Airbnb Logo */
 function Logo() {
   const router = useRouter();
+
   return (
     <Image
+      onClick={() => router.push("/")}
       alt="logo"
       className="hidden md:block cursor-pointer"
       height="100"
