@@ -41,15 +41,16 @@ function LoginModal() {
     signIn("credentials", {
       ...data,
       redirect: false,
-    }).then((callback) => {
+    }).then((res) => {
       setIsLoading(false);
-      console.log(callback);
-      if (callback?.ok) {
+      if (!res?.error) {
         toast.success("Logged in successfully");
         // Refresh the current page
-        // router.refresh();
+        router.refresh();
         loginModal.onClose();
-      } else if (callback?.error) {
+      }
+
+      if (res?.error) {
         toast.error("Invalid email or password");
       }
     });

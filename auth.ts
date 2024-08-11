@@ -34,21 +34,19 @@ environment. Here's a breakdown of what it is doing: */
           password: { label: "Password", type: "password" },
         },
         authorize: async (credentials) => {
-          console.log(credentials);
           // credentials contain the email and password
           if (!credentials?.email || !credentials?.password) {
             throw new Error("Invalid Credentials");
           }
 
           // Find the user in the database
-          let user = null;
-          user = await prisma?.user.findUnique({
+          const user = await prismaClient?.user.findUnique({
             where: {
               email: credentials.email as string,
             },
           });
 
-          // If there is no user and there is no hashed password throw error
+          // If there is no user or there is no hashed password throw error
           if (!user || !user?.hashedPassword) {
             throw new Error("Invalid User or Hashed password");
           }
