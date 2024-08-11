@@ -6,6 +6,7 @@ interface HeadingProps {
   center?: boolean;
 }
 
+/* Heading prop for heading and subtitle */
 function Heading({ title, subtitle, center }: HeadingProps) {
   return (
     <div className={center ? "text-center" : "text-start"}>

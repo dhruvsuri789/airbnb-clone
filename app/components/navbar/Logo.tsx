@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+/* Main Airbnb Logo */
 function Logo() {
   const router = useRouter();
   return (

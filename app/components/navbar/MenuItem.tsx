@@ -5,6 +5,7 @@ interface MenuItemProps {
   label: string;
 }
 
+/* For Menu containing Sign up and Login button as MenuItem components */
 function MenuItem({ onClick, label }: MenuItemProps) {
   return (
     <div

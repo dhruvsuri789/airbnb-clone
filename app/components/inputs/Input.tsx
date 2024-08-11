@@ -14,6 +14,8 @@ interface InputProps {
   errors: FieldErrors;
 }
 
+/* Input component working with React Hook Forms */
+
 function Input({
   id,
   label,

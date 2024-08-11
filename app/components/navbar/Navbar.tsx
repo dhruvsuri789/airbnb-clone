@@ -5,6 +5,7 @@ import Logo from "./Logo";
 import Search from "./Search";
 import UserMenu from "./UserMenu";
 
+/* Main navbar containing Logo, Search and Menu */
 function Navbar() {
   return (
     <div className="fixed w-full bg-white z-10 shadow-sm">

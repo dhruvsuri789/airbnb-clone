@@ -11,6 +11,7 @@ interface ButtonProps {
   icon?: IconType;
 }
 
+// Reusable Button component with different views
 function Button({
   label,
   onClick,

@@ -4,6 +4,12 @@ import { useCallback, useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import Button from "../Button";
 
+/* 
+ReactNode Represents all of the things React can render. -> Thats why good for children prop
+
+Where ReactElement only represents JSX, ReactNode represents everything that can be rendered.
+*/
+
 interface ModalProps {
   isOpen?: boolean;
   onClose: () => void;
@@ -16,6 +22,9 @@ interface ModalProps {
   secondaryAction?: () => void;
   secondaryActionLabel?: string;
 }
+
+/* A reusable component for Modal Window showing different information based on the props */
+/* It is used in RegisterModal, */
 
 function Modal({
   isOpen,
@@ -100,6 +109,7 @@ function Modal({
                     onClick={handleSubmit}
                   />
                 </div>
+                {footer}
               </div>
             </div>
           </div>
