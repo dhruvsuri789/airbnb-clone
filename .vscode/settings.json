@@ -1,3 +1,8 @@
 {
-  "docwriter.style": "Auto-detect"
+  "docwriter.style": "Auto-detect",
+  "marscode.enableCodelens": {
+    "enableInlineDocumentation": false,
+    "enableInlineUnitTest": false,
+    "enableInlineExplain": false
+  }
 }
