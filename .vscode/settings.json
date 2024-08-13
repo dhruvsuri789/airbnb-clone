@@ -4,5 +4,7 @@
     "enableInlineDocumentation": false,
     "enableInlineUnitTest": false,
     "enableInlineExplain": false
-  }
+  },
+  "codeium.enableCodeLens": true,
+  "codeium.enableExplainProblem": true
 }

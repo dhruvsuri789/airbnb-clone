@@ -24,7 +24,7 @@ interface ModalProps {
 }
 
 /* A reusable component for Modal Window showing different information based on the props */
-/* It is used in RegisterModal, */
+/* It is used in RegisterModal, SearchModal, LoginModal, RentModal */
 
 function Modal({
   isOpen,
