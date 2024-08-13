@@ -12,19 +12,20 @@ export interface IListingsParams {
 }
 
 export default async function getListings(params: IListingsParams) {
-  try {
-    const {
-      userId,
-      roomCount,
-      guestCount,
-      bathroomCount,
-      locationValue,
-      startDate,
-      endDate,
-      category,
-    } = params;
-    let query: any = {};
+  //Use dynamic data outside of try/catch statements and avoid DynamicServerError
+  const {
+    userId,
+    roomCount,
+    guestCount,
+    bathroomCount,
+    locationValue,
+    startDate,
+    endDate,
+    category,
+  } = params;
+  let query: any = {};
 
+  try {
     if (userId) {
       query.userId = userId;
     }
