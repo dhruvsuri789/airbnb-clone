@@ -28,7 +28,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" type="image/png" href="/images/favicon.png" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body className={font.className}>
         {/* Placing it here means toast will be shown here */}
