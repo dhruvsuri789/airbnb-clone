@@ -9,6 +9,7 @@ interface EmptyStateProps {
   subtitle?: string;
   showReset?: boolean;
   showRefresh?: boolean;
+  showBackHome?: boolean;
 }
 
 function EmptyState({
@@ -16,6 +17,7 @@ function EmptyState({
   subtitle = "Try changing or removing some of your filters",
   showReset,
   showRefresh,
+  showBackHome,
 }: EmptyStateProps) {
   const router = useRouter();
 
@@ -32,6 +34,13 @@ function EmptyState({
         )}
         {showRefresh && (
           <Button outline label="Refresh" onClick={() => router.refresh()} />
+        )}
+        {showBackHome && (
+          <Button
+            outline
+            label="Go back home"
+            onClick={() => router.push("/")}
+          />
         )}
       </div>
     </div>
