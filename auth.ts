@@ -9,30 +9,51 @@ import bcrypt from "bcryptjs";
 /* This code block is exporting several constants (`auth`, `handlers`, `signIn`, `signOut`) from the
 result of calling the `NextAuth` function with a configuration object as an argument. Here's a
 breakdown of what each constant represents: */
+/* 
+auth: The main authentication object.
+handlers: Contains HTTP handlers for GET and POST requests.signIn: Function to handle user sign-in.
+signOut: Function to handle user sign-out.
+*/
 export const {
   auth,
   handlers: { GET, POST },
   signIn,
   signOut,
 } =
-  /* This code block is configuring the authentication settings using NextAuth in a TypeScript
-environment. Here's a breakdown of what it is doing: */
+  /* This code block is configuring the authentication settings using NextAuth in a TypeScript environment.
+  adapter: Uses PrismaAdapter to connect to a Prisma client, which is used for database interactions.
+  providers: Specifies the authentication providers (GitHub, Google, and custom credentials).
+  pages: Customizes the sign-in page to redirect to the home page ("/").
+  debug: Enables debugging in development mode.
+  session: Configures session management to use JSON Web Tokens (JWT).
+  secret: Secret key for encrypting JWTs.
+*/
   NextAuth({
     adapter: PrismaAdapter(prismaClient),
     providers: [
+      // Uses GitHub OAuth for authentication.
       Github({
         clientId: process.env.GITHUB_ID as string,
         clientSecret: process.env.GITHUB_SECRET as string,
       }),
+      // Uses Google OAuth for authentication.
       Google({
         clientId: process.env.GOOGLE_CLIENT_ID as string,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
       }),
+      // Custom authentication using email and password.
       CredentialsProvider({
         credentials: {
           email: { label: "Email", type: "email" },
           password: { label: "Password", type: "password" },
         },
+        /* 
+        authorize function:
+          - Validates the presence of email and password.
+          - Fetches the user from the database using Prisma.
+          - Checks if the user exists and if the hashed password matches the provided password using bcrypt.
+          - Returns the user if authentication is successful, otherwise throws an error.
+        */
         authorize: async (credentials) => {
           // credentials contain the email and password
           if (!credentials?.email || !credentials?.password) {
@@ -65,12 +86,15 @@ environment. Here's a breakdown of what it is doing: */
         },
       }),
     ],
-    // Whenever any errors happens it will redirect to our home page
+    // Customizes the sign-in page to redirect to the home page ("/").
+    // Redirects to the home page ("/") whenever an error occurs during sign-in.
     pages: {
       signIn: "/",
     },
-    // You only want to enable debugging in development, avoid termainal errors
+    // You only want to enable debugging in development, avoid terminal errors. Enables debugging in development mode to help with troubleshooting.
     debug: process.env.NODE_ENV === "development",
+    // Uses JWT for session management, which is a stateless way to handle user sessions.
     session: { strategy: "jwt" },
+    // Uses an environment variable for the secret key to secure JWTs.
     secret: process.env.NEXTAUTH_SECRET,
   });
