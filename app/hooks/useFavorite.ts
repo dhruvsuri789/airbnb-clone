@@ -52,13 +52,13 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
         await request();
 
         // Refresh the page and show success toast
-        // router.refresh();
-        // toast.success("Success");
+        router.refresh();
+        toast.success("Success");
       } catch (error) {
         toast.error("Something went wrong");
       }
     },
-    [currentUser, hasFavorited, listingId, loginModal]
+    [currentUser, hasFavorited, listingId, loginModal, router]
   );
 
   return {
