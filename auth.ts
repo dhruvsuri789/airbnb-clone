@@ -73,6 +73,13 @@ export const {
           }
 
           // Checking the password with the encrypted hashed password
+          /**
+           * Compares the provided password with the stored hashed password.
+           *
+           * @param {string} credentials.password - The password provided by the user.
+           * @param {string} user.hashedPassword - The hashed password stored in the database.
+           * @returns {Promise<boolean>} - A promise that resolves to a boolean indicating if the password is correct.
+           */
           const isCorrectPassword = await bcrypt.compare(
             credentials.password as string,
             user.hashedPassword

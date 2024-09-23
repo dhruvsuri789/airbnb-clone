@@ -21,7 +21,7 @@ interface NavbarProps {
 } 
 */
 
-/* Main navbar containing Logo, Search and Menu */
+/* Main navbar containing Logo, Search, Filters and Menu */
 function Navbar({ currentUser }: NavbarProps) {
   return (
     <div className="fixed w-full bg-white z-10 shadow-sm">

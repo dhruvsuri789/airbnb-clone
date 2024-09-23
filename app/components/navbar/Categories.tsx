@@ -100,9 +100,10 @@ export const categories = [
 function Categories() {
   const params = useSearchParams();
   const category = params?.get("category");
+
+  //Only show categories on main page
   const pathname = usePathname();
   const isMainPage = pathname === "/";
-
   if (!isMainPage) return null;
 
   return (

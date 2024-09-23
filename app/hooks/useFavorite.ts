@@ -11,14 +11,20 @@ interface IUseFavorite {
 }
 
 const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
+  // To refresh the page after clicking on the favorite button
   const router = useRouter();
+
+  // To open login modal if user is not logged in
   const loginModal = useLoginModal();
 
+  // To check if the listing is favorited inside the fovoriteIds array
   const hasFavorited = useMemo(() => {
     const favoriteIds = currentUser?.favoriteIds || [];
     return favoriteIds.includes(listingId);
   }, [currentUser, listingId]);
 
+  // To toggle the favorite status
+  // We are using route handlers to mutate the favorite status
   const toggleFavorite = useCallback(
     async (e: React.MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
@@ -42,9 +48,12 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
           }); */
         }
 
+        // Awaiting the request
         await request();
+
+        // Refresh the page and show success toast
         router.refresh();
-        toast.success("Success");
+        // toast.success("Success");
       } catch (error) {
         toast.error("Something went wrong");
       }

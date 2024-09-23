@@ -6,5 +6,7 @@
     "enableInlineExplain": false
   },
   "codeium.enableCodeLens": true,
-  "codeium.enableExplainProblem": true
+  "codeium.enableExplainProblem": true,
+  "pieces.autocomplete": false,
+  "pieces.code-lens": false
 }

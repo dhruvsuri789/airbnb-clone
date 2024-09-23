@@ -12,7 +12,8 @@ export interface IListingsParams {
 }
 
 export default async function getListings(params: IListingsParams) {
-  //Use dynamic data outside of try/catch statements and avoid DynamicServerError
+  // Use dynamic data outside of try/catch statements and avoid DynamicServerError
+  // When you need to use dynamic data, use the following pattern
   const {
     userId,
     roomCount,
@@ -23,6 +24,7 @@ export default async function getListings(params: IListingsParams) {
     endDate,
     category,
   } = params;
+
   let query: any = {};
 
   try {
@@ -59,6 +61,13 @@ export default async function getListings(params: IListingsParams) {
 
     if (startDate && endDate) {
       //Using reverse filtering
+      /**
+       * Constructs a query object to find records that do not have overlapping reservations.
+       * The query checks for reservations where:
+       * - The end date is greater than or equal to the start date of the new reservation and the start date is less than or equal to the start date of the new reservation.
+       * - OR the start date is less than or equal to the end date of the new reservation and the end date is greater than or equal to the end date of the new reservation.
+       * Putting it all together, this query is looking for records that do not have any reservations that overlap with a given time period defined by startDate and endDate. If a record has a reservation that overlaps with this time period, it will be excluded from the results.
+       */
       query.NOT = {
         reservations: {
           some: {
@@ -77,6 +86,8 @@ export default async function getListings(params: IListingsParams) {
       };
     }
 
+    // This is where the magic happens
+    // We will get all the listings that match the query
     const listings = await prismaClient.listing.findMany({
       where: query,
       orderBy: {

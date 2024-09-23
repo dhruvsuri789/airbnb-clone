@@ -19,6 +19,8 @@ interface ListingCardProps {
   currentUser?: User | null;
 }
 
+// This is used for Main page listings, Reservations page, Properties page, Trips page and Favorites page
+// This is common component for all and when clicked goes to listings/[listingId]/page.tsx
 function ListingCard({
   data,
   reservation,
@@ -28,11 +30,18 @@ function ListingCard({
   actionId = "",
   currentUser,
 }: ListingCardProps) {
+  // When clicked on the listing goes to listings/[listingId]/page.tsx
   const router = useRouter();
+
+  // This is used to get country and retrieves a country object by its value which is locationValue
+  // locationValue is saved in the database when a new listing is created using the RentModal when you Airbnb you home!
   const { getByValue } = useCountries();
+  const country = getByValue(data.locationValue);
 
-  const location = getByValue(data.locationValue);
-
+  // For cancelling a reservation of your guest and cancel your own trip.
+  // Used in Reservations page and Trips page
+  // The action callback is different in both cases so it is passed from these two pages.
+  // It takes in the reservation id and sends a delete request to the server
   const handleCancel = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
@@ -43,6 +52,8 @@ function ListingCard({
     [disabled, onAction, actionId]
   );
 
+  // The totalPrice is shown on your Trips page where you have reserved a listing and on Reservations page where your guests have reserved your listing
+  // Otherwise it shows the price of the listing
   const price = useMemo(() => {
     if (reservation) {
       return reservation.totalPrice;
@@ -50,6 +61,8 @@ function ListingCard({
     return data.price;
   }, [reservation, data.price]);
 
+  // The reservationDate is shown on your Trips page where you have reserved the listing and on Reservations page where your guests have reserved your listing
+  // Otherwise it returns null
   const reservationDate = useMemo(() => {
     if (!reservation) {
       return null;
@@ -77,7 +90,7 @@ function ListingCard({
           </div>
         </div>
         <div className="font-semibold text-lg">
-          {location?.region}, {location?.label}
+          {country?.region}, {country?.label}
         </div>
         <div className="font-light text-neutral-500">
           {reservationDate || data.category}

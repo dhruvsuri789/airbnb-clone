@@ -1,6 +1,16 @@
 import { auth } from "@/auth";
 import prismaClient from "../libs/prismadb";
 
+/**
+ * Retrieves the current user based on the session information.
+ *
+ * @returns The current user object if found, otherwise null.
+ *
+ * @throws {Error} If there is an issue retrieving the user, an error is caught and null is returned.
+ */
+/* 
+For explanation -> To learn more go to Notion `Programming/Session and Database for user` for this
+*/
 export default async function getCurrentUser() {
   try {
     const session = await auth();
