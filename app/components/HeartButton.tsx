@@ -6,6 +6,7 @@ import useFavorite from "../hooks/useFavorite";
 import { useMemo, useOptimistic } from "react";
 import useLoginModal from "../hooks/useLoginModal";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface HeartButtonProps {
   listingId: string;
@@ -13,6 +14,9 @@ interface HeartButtonProps {
 }
 
 function HeartButton({ listingId, currentUser }: HeartButtonProps) {
+  // To refresh the page after clicking on the favorite button
+  const router = useRouter();
+
   // To open login modal if user is not logged in
   const loginModal = useLoginModal();
 
@@ -45,6 +49,7 @@ function HeartButton({ listingId, currentUser }: HeartButtonProps) {
   const handleToggleFavorite = async (e: React.MouseEvent<HTMLDivElement>) => {
     if (!optimisticUser) return loginModal.onOpen();
     toggleOptimistic(listingId);
+    router.refresh();
     toast.success("Success");
     await toggleFavorite(e);
   };
