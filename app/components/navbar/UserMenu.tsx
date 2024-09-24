@@ -28,16 +28,13 @@ function UserMenu({ currentUser }: UserMenuProps) {
   }, []);
 
   const onRent = useCallback(() => {
-    // Close the menu
-    toggleOpen();
-
     if (!currentUser) {
       return loginModal.onOpen();
     }
 
     //Open rent modal
     rentModal.onOpen();
-  }, [currentUser, loginModal, rentModal, toggleOpen]);
+  }, [currentUser, loginModal, rentModal]);
 
   return (
     <div className="relative">
