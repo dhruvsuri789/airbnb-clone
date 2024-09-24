@@ -54,6 +54,8 @@ function RentModal() {
   });
 
   // Watch changes in the values of the rent modal
+  // and set them using the setValue function inside setCustomValue
+  // Otherwise we would need many useState hooks to manage and store form values
   const category = watch("category");
   const location = watch("location");
   const guestCount = watch("guestCount");
@@ -61,8 +63,8 @@ function RentModal() {
   const bathroomCount = watch("bathroomCount");
   const imageSrc = watch("imageSrc");
 
-  // Something crazy
-
+  // When location changes the Map again will be dynamically rendered
+  // location is not a dependency but this trick works here
   const Map = useMemo(
     () => dynamic(() => import("../Map"), { ssr: false }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -70,7 +72,8 @@ function RentModal() {
   );
 
   const setCustomValue = (id: string, value: any) => {
-    //It does not re-render the page so this is a workaround from useForm hook
+    // It does not re-render the page so this is a workaround for useState hook
+    // Otherwise we would need many useState hooks to manage and store form values
     setValue(id, value, {
       shouldValidate: true,
       shouldDirty: true,
@@ -111,15 +114,18 @@ function RentModal() {
   };
 
   const actionLabel = useMemo(() => {
+    // If it is the last step, return "Create"
     if (step === STEPS.PRICE) return "Create";
     return "Next";
   }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
+    // If it is the first step, return undefined
     if (step === STEPS.CATEGORY) return undefined;
     return "Back";
   }, [step]);
 
+  // Configure the body content based on the current step
   let bodyContent = (
     <div className="flex flex-col gap-8">
       <Heading

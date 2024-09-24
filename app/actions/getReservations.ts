@@ -29,6 +29,7 @@ export default async function getReservations(params: IParams) {
       query.listing = { userId: authorId };
     }
 
+    // getting all the reservations (listings) where I am the author
     const reservations = await prismaClient.reservation.findMany({
       where: query,
       include: {

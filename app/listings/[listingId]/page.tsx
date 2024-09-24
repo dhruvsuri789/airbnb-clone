@@ -10,7 +10,7 @@ interface IParams {
 }
 
 //This is a Server Component so we can only use Actions such as getListingById here which can directly communicate with the database and not useRouter hook for navigation as it can only be used inside Client Components
-// We can still access the parameters in Server Components which is the url
+// We can still access the parameters in Server Components which is in the url
 
 async function ListingPage({ params }: { params: IParams }) {
   const listing = await getListingById(params);

@@ -35,20 +35,25 @@ function SearchModal() {
     key: "selection",
   });
 
+  // When location chaanges the Map again will be dynamically rendered
+  // location is not a dependency but this trick works here
   const Map = useMemo(
     () => dynamic(() => import("../Map"), { ssr: false }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [location]
   );
 
+  // Go back one step
   const onBack = useCallback(() => {
     setStep((value) => value - 1);
   }, []);
 
+  // Go forward one step
   const onNext = useCallback(() => {
     setStep((value) => value + 1);
   }, []);
 
+  // Submit search
   const onSubmit = useCallback(async () => {
     if (step !== STEPS.INFO) {
       return onNext();
@@ -103,6 +108,7 @@ function SearchModal() {
   ]);
 
   const actionLabel = useMemo(() => {
+    // If at last step return "Search"
     if (step === STEPS.INFO) {
       return "Search";
     }
@@ -110,12 +116,15 @@ function SearchModal() {
   }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
+    // If at first step return undefined meaning there is no back button
     if (step === STEPS.LOCATION) {
       return undefined;
     }
     return "Back";
   }, [step]);
 
+  // Making different body content to display based on the Steps
+  // This is the default for STEPS.LOCATION
   let bodyContent = (
     <div className="flex flex-col gap-8">
       <Heading

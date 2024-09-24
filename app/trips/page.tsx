@@ -10,9 +10,10 @@ async function TripsPage() {
     return <EmptyState title="Unauthorized" subtitle="Please login" />;
   }
 
-  //TODO reservations is empty here when the user is redirected from Listing Client page to /trips page
+  // Reservations is empty here when the user is redirected from Listing Client page to /trips page
   // Because its an async function
   //Fixed it using loading.tsx or not
+  // Fixed it finally. It started working
   const reservations = await getReservations({ userId: currentUser.id });
 
   if (reservations.length === 0) {

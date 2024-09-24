@@ -16,6 +16,7 @@ export async function POST(request: Request) {
     return NextResponse.error();
   }
 
+  // creating a new reservation associated with the listing.
   const listingAndReservation = await prismaClient.listing.update({
     where: {
       id: listingId,

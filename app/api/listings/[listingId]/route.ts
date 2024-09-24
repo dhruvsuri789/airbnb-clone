@@ -21,6 +21,7 @@ export async function DELETE(
     throw new Error("Invalid ID");
   }
 
+  // Delete the listing where only the owner can delete it
   const listing = await prismaClient.listing.deleteMany({
     where: {
       id: listingId,

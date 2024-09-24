@@ -5,8 +5,9 @@
     "enableInlineUnitTest": false,
     "enableInlineExplain": false
   },
-  "codeium.enableCodeLens": true,
+  "codeium.enableCodeLens": false,
   "codeium.enableExplainProblem": true,
   "pieces.autocomplete": false,
-  "pieces.code-lens": false
+  "pieces.code-lens": false,
+  "codeium.enableCommandSideHintEducation": false
 }

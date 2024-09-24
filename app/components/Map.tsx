@@ -7,8 +7,11 @@ import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
+//Deletes the default method for getting the icon URL from L.Icon.Default prototype.
 //@ts-ignore
 delete L.Icon.Default.prototype._getIconUrl;
+
+// Merges custom options into the default options for L.Icon.Default.
 L.Icon.Default.mergeOptions({
   iconUrl: markerIcon.src,
   iconRetinaUrl: markerIcon2x.src,
@@ -19,6 +22,12 @@ interface MapProps {
   center?: number[];
 }
 
+/**
+ * Map component that renders a map using Leaflet.
+ *
+ * @param {MapProps} props - The properties for the Map component.
+ * @param {L.LatLngExpression} props.center - The center position of the map.
+ */
 function Map({ center }: MapProps) {
   return (
     <MapContainer

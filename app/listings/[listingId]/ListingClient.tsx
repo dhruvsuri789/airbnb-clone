@@ -33,13 +33,21 @@ function ListingClient({
   currentUser,
   reservations = [],
 }: ListingClientProps) {
+  // To open login modal if user is not logged in and tries to book a listing
   const loginModal = useLoginModal();
   const router = useRouter();
 
+  /**
+   * Memoized computation of disabled dates based on reservations.
+   *
+   * This hook calculates an array of dates that are disabled for selection,
+   * derived from the start and end dates of each reservation.
+   */
   const disabledDates = useMemo(() => {
     let dates: Date[] = [];
 
     reservations.forEach((reservation) => {
+      // Generates an array of dates within the specified interval which is between the start and end date.
       const range = eachDayOfInterval({
         start: new Date(reservation.startDate),
         end: new Date(reservation.endDate),

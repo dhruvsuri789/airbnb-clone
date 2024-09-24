@@ -4,6 +4,8 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+//Prisma as an ORM (Object-Relational Mapping) tool to interact with a database. 
+//Prisma allows you to define your database schema and perform CRUD (Create, Read, Update, Delete) operations in a type-safe manner.
 
 generator client {
   provider = "prisma-client-js"

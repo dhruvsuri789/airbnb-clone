@@ -10,6 +10,7 @@ async function PropertiesPage() {
     return <EmptyState title="Unauthorized" subtitle="Please login" />;
   }
 
+  // Get all listings for the current user
   const listings = await getListings({ userId: currentUser.id });
 
   if (listings.length === 0) {
@@ -17,6 +18,7 @@ async function PropertiesPage() {
       <EmptyState
         title="No properties found"
         subtitle="Looks like you have no properties."
+        showBackHome
       />
     );
   }

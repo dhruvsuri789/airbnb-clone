@@ -12,6 +12,7 @@ async function FavoritesPage() {
       <EmptyState
         title="No favorites found"
         subtitle="Looks like you have no favorite listings."
+        showBackHome
       />
     );
   }

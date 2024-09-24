@@ -65,6 +65,8 @@ function Modal({
     secondaryAction();
   }, [disabled, secondaryAction]);
 
+  // Magic happens here: Only here we render the modal if isOpen is true
+  // This has a serious data flow from parent to child.
   if (!isOpen) return null;
 
   return (
