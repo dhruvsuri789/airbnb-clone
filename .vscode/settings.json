@@ -9,5 +9,6 @@
   "codeium.enableExplainProblem": true,
   "pieces.autocomplete": false,
   "pieces.code-lens": false,
-  "codeium.enableCommandSideHintEducation": false
+  "codeium.enableCommandSideHintEducation": false,
+  "workbench.editor.enablePreview": false
 }

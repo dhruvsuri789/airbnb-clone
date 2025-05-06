@@ -14,8 +14,8 @@ import Loader from "./components/Loader";
 const font = Nunito({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Airbnb",
-  description: "Airbnb clone",
+  title: "Homestay | Find a place to stay",
+  description: "Find a place to stay",
 };
 
 export default async function RootLayout({
