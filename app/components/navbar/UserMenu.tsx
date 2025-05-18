@@ -1,15 +1,15 @@
 "use client";
 
-import { AiOutlineMenu } from "react-icons/ai";
-import Avatar from "../Avatar";
-import { useCallback, useState } from "react";
-import MenuItem from "./MenuItem";
-import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useLoginModal from "@/app/hooks/useLoginModal";
+import useRegisterModal from "@/app/hooks/useRegisterModal";
+import useRentModal from "@/app/hooks/useRentModal";
 import { User } from "@prisma/client";
 import { signOut } from "next-auth/react";
-import useRentModal from "@/app/hooks/useRentModal";
 import { useRouter } from "next/navigation";
+import { useCallback, useState } from "react";
+import { AiOutlineMenu } from "react-icons/ai";
+import Avatar from "../Avatar";
+import MenuItem from "./MenuItem";
 
 interface UserMenuProps {
   currentUser?: User | null;
@@ -43,7 +43,7 @@ function UserMenu({ currentUser }: UserMenuProps) {
           onClick={onRent}
           className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
         >
-          Airbnb your home
+          Rent your home
         </div>
         <div
           onClick={toggleOpen}
@@ -99,7 +99,7 @@ function UserMenu({ currentUser }: UserMenuProps) {
                     toggleOpen();
                     rentModal.onOpen();
                   }}
-                  label="Airbnb my home"
+                  label="Rent my home"
                 />
                 <hr />
                 <MenuItem

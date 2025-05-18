@@ -1,19 +1,19 @@
 "use client";
 
 import axios from "axios";
+import { useCallback, useState } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { useCallback, useState } from "react";
-import { Field, FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
+import useLoginModal from "@/app/hooks/useLoginModal";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
-import Modal from "./Modal";
-import Heading from "../Heading";
-import Input from "../inputs/Input";
+import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
 import Button from "../Button";
-import { signIn } from "next-auth/react";
-import useLoginModal from "@/app/hooks/useLoginModal";
+import Heading from "../Heading";
+import Input from "../inputs/Input";
+import Modal from "./Modal";
 
 /* Main modal to register the user */
 /* Using Zustand for global state , React Hook Form for form submission */
@@ -59,7 +59,7 @@ function RegisterModal() {
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <Heading title="Welcome to Airbnb" subtitle="Create an account!" />
+      <Heading title="Welcome to Homestay" subtitle="Create an account!" />
       <Input
         id="email"
         label="Email"
